@@ -1,0 +1,19 @@
+{
+  "name": "mean-blog",
+  "version": "1.0.0",
+  "description": "Angular 5, Express and MongoDB Blog CMS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brevelles/MEAN-blog.git"
+  },
+  "author": "Bernardo Revelles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brevelles/MEAN-blog/issues"
+  },
+  "homepage": "https://github.com/brevelles/MEAN-blog#readme"
+}
