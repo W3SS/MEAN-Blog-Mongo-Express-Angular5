@@ -4,6 +4,7 @@
   "description": "Angular 5, Express and MongoDB Blog CMS",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/brevelles/MEAN-blog/issues"
   },
-  "homepage": "https://github.com/brevelles/MEAN-blog#readme"
+  "homepage": "https://github.com/brevelles/MEAN-blog#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-validator": "^4.3.0",
+    "mongoose": "^4.13.6"
+  }
 }
