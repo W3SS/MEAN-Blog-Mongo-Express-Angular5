@@ -1,14 +1,26 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const app = express();
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 const expressValidator = require('express-validator');
+const passport = require('passport');
+const path = require('path');
+const cors = require('cors');
 
+const app = express();
 const config = require('./config/database');
 const port = 8080;
 
 // Load routes
-const authRoutes = require('./routes/auth.routes');
+const usersRoutes = require('./routes/users.routes');
+
+// Body parser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+
+// Log requests to console
+app.use(morgan('dev'));
 
 // Connect to database
 mongoose.Promise = global.Promise;
@@ -28,15 +40,23 @@ mongoose.connect(
     }
 );
 
-// Body parser
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// Set Static Folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 // Initialize express-validator
 app.use(expressValidator());
 
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Passport strategy
+require('./config/passport.js')(passport);
+
 // Routes
-app.use('/authentication', authRoutes);
+app.use('/users', usersRoutes);
 app.use('*', (req, res) => {
     res.send('Invalid Endpoint');
 });

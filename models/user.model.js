@@ -30,6 +30,26 @@ const UserSchema = new Schema({
     }
 });
 
+UserSchema.pre('save', function(next) {
+    let newUser = this;
+
+    // Hash password
+    if (this.isModified('password') || this.isNew) {
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                newUser.password = hash;
+                next();
+            });
+        });
+    } else {
+        return next();
+    }
+});
+
+UserSchema.statics.getUserById = function(id, callback){
+    this.findById(id, callback);
+}
+
 UserSchema.statics.getUserByUsername = function(username, callback) {
     const query = {username: username};
     this.findOne(query, callback);
@@ -49,8 +69,7 @@ UserSchema.statics.ensureAuthenticated = function(req, res, next) {
     if(req.isAuthenticated()){
         return next();
     } else {
-        //req.flash('error_msg', 'You are not logged in');
-        res.redirect('/login')
+        res.send('fuera');
     }
 };
 

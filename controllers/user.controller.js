@@ -6,7 +6,7 @@ const User = require('../models/user.model');
 
 exports.postUser = function(req, res) {
 
-    // Express validation
+/*     // Express validation
     req.checkBody('firstName', 'Name is required').notEmpty();
     req.checkBody('lastName', 'Last name is required').notEmpty();
 	req.checkBody('email', 'Email is required').notEmpty();
@@ -25,18 +25,12 @@ exports.postUser = function(req, res) {
         // Save user
         const newUser = User(req.body);
 
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-                newUser.password = hash;
-
-                newUser.save(newUser, (err, user) => {
-                    if(err) {
-                        res.send(err);
-                    } else {
-                        res.json({success: true, message: 'User saved', user});
-                    }
-                });
-            });
+        newUser.save(newUser, (err, user) => {
+            if(err) {
+                res.send(err);
+            } else {
+                res.json({success: true, message: 'User saved', user});
+            }
         });
-    }
+    } */
 }
