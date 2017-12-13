@@ -46,15 +46,14 @@ UserSchema.pre('save', function(next) {
     }
 });
 
+// Custom User methods
 UserSchema.statics.getUserById = function(id, callback){
     this.findById(id, callback);
 }
-
 UserSchema.statics.getUserByUsername = function(username, callback) {
     const query = {username: username};
     this.findOne(query, callback);
 }
-
 UserSchema.statics.comparePassword = function(candidatePassword, hash, callback){
     bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
         if(err) {
@@ -63,14 +62,5 @@ UserSchema.statics.comparePassword = function(candidatePassword, hash, callback)
         callback(null, isMatch);
     });
 }
-
-UserSchema.statics.ensureAuthenticated = function(req, res, next) {
-    //console.log(req)
-    if(req.isAuthenticated()){
-        return next();
-    } else {
-        res.send('fuera');
-    }
-};
 
 module.exports = mongoose.model('User', UserSchema)

@@ -13,6 +13,7 @@ const port = 8080;
 
 // Load routes
 const usersRoutes = require('./routes/users.routes');
+const articlesRoutes = require('./routes/articles.routes');
 
 // Body parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,8 +44,6 @@ mongoose.connect(
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 // Initialize express-validator
 app.use(expressValidator());
 
@@ -56,7 +55,8 @@ app.use(passport.session());
 require('./config/passport.js')(passport);
 
 // Routes
-app.use('/users', usersRoutes);
+app.use('/api/users', usersRoutes);
+app.use('/api/articles', articlesRoutes)
 app.use('*', (req, res) => {
     res.send('Invalid Endpoint');
 });
