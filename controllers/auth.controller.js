@@ -1,3 +1,4 @@
+// Load dependencies
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
@@ -9,13 +10,9 @@ const User = require('../models/user.model');
 // Load config
 const config = require('../config/database');
 
-/*===========================
-    Registration
-============================*/
 // Register user
 exports.registerUser = function(req, res) {
-        
-    // Express validation
+    // Validation
     req.checkBody('firstName', 'First name is required').notEmpty();
     req.checkBody('lastName', 'Last name is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
@@ -31,8 +28,8 @@ exports.registerUser = function(req, res) {
     if(errors){
         res.json({errors:errors});
     } else {
-        // Save new user
-        let newUser = User(req.body);
+        // Save new User
+        const newUser = User(req.body);
 
         newUser.save(newUser, (err, user) => {
             if(err) {
@@ -49,13 +46,11 @@ exports.registerUser = function(req, res) {
                         email: user.email
                     }
                 });
-            }
+            };
         });
-    }
-}
-/*===========================
-    Authentication
-============================*/
+    };
+};
+
 // Authenticate user
 exports.authenticateUser = function(req, res) {
 
@@ -73,36 +68,37 @@ exports.authenticateUser = function(req, res) {
 
         User.getUserByUsername(username, (err, user) => {
             if(err) {
-                res.json(err);
+                res.send(err);
             } if(!user) {
-                res.json({success: false, message: 'User not found'})
-            }
-
-            User.comparePassword(password, user.password, (err, isMatch) => {
-                if(err){
-                    return res.send(err);
-                }
-                if(isMatch){
-                    // JWT
-                    const token = jwt.sign(user.toJSON(), config.secret, {
-                    expiresIn: 604800 // 1 week
-                    });
+                res.json({success: false, message: 'User not found'});
+            } else {
+                // Check user password
+                User.comparePassword(password, user.password, (err, isMatch) => {
+                    if(err){
+                        return res.send(err);
+                    }
+                    if(isMatch){
+                        // Create token
+                        const token = jwt.sign(user.toJSON(), config.secret, {
+                            expiresIn: 86400 // 1 day in seconds
+                        });
                         res.json({
-                        success: true,
-                        message: 'User autehnticated',
-                        token: 'Bearer ' + token,
-                        user: {
-                            id: user._id,
-                            firstName: user.firstName,
-                            lastName: user.lastName,
-                            username: user.username,
-                            email: user.email
-                        }
-                    });
-                } else {
-                    res.json({success: false, message: 'Wrong password'});
-                }
-            });
-        })
-    }
-}
+                            success: true,
+                            message: 'User authenticated',
+                            token: 'Bearer ' + token,
+                            user: {
+                                id: user._id,
+                                firstName: user.firstName,
+                                lastName: user.lastName,
+                                username: user.username,
+                                email: user.email
+                            }
+                        });
+                    } else {
+                        res.json({success: false, message: 'Wrong password'});
+                    };
+                });
+            };
+        });
+    };
+};

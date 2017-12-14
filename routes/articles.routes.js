@@ -1,3 +1,4 @@
+// Load dependencies
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
@@ -6,9 +7,7 @@ const jwt = require('jsonwebtoken');
 // Load Article model
 const Article = require('../models/article.model');
 
-// Load Articles controller
-const articlesController = require('../controllers/articles.controller');
-
+// Articles routes
 router.route('/')
     // Get articles
     .get((req, res) => {
@@ -22,7 +21,7 @@ router.route('/')
     })
     // Create article
     .post(passport.authenticate('jwt', {session:false}), (req, res) => {
-        
+
         // Express validation
         req.checkBody('title', 'Title is required').notEmpty();
         req.checkBody('body', 'Body is required').notEmpty();
@@ -30,14 +29,14 @@ router.route('/')
         var errors = req.validationErrors();
 
         if(errors) {
-            res.json({errors:errors})
+            res.json({errors:errors});
         } else {
             // Save Article
-            let newArticle = Article(req.body);
+            const newArticle = Article(req.body);
 
             newArticle.save(newArticle, (err, article) => {
                 if(err) {
-                    res.send(err)
+                    res.send(err);
                 } else {
                     res.json({
                         success: true,
@@ -49,6 +48,7 @@ router.route('/')
         };
     });
 
+// Article routes
 router.route('/:article_id')
     // Get article
     .get((req, res) => {
@@ -84,9 +84,9 @@ router.route('/:article_id')
                     success: true,
                     message: 'Article deleted',
                     article: article
-                })
-            }
-        })
+                });
+            };
+        });
     });
 
 module.exports = router;

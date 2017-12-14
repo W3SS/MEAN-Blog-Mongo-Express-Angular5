@@ -1,3 +1,4 @@
+// Load dependencies
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -8,7 +9,11 @@ const path = require('path');
 const cors = require('cors');
 
 const app = express();
+
+// load config file
 const config = require('./config/database');
+
+// Port
 const port = 8080;
 
 // Load routes
@@ -20,8 +25,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-// Log requests to console
-app.use(morgan('dev'));
+// Log requests to console 
+// app.use(morgan('dev'));  //uncomment for development
 
 // Connect to database
 mongoose.Promise = global.Promise;
@@ -61,6 +66,7 @@ app.use('*', (req, res) => {
     res.send('Invalid Endpoint');
 });
 
+// Listen
 app.listen(port, () => {
     console.log('App listening on port ' + port);
-})
+});

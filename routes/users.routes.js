@@ -14,41 +14,34 @@ const User = require('../models/user.model');
 // Load user controller
 const authController = require('../controllers/auth.controller');
 
-/*===========================
-    Authentication routes
-============================*/
-
-// Register user
+// Auth route: Register user
 router.route('/register')
     .post(authController.registerUser);
 
-// Authenticate user
+// Auth route: Authenticate user
 router.route('/authenticate')
     .post(authController.authenticateUser);
 
-
-/*===========================
-    Users routes
-============================*/
-
+// Users routes
 router.route('/')
     // Get users
     .get(passport.authenticate('jwt', {session:false}), (req, res) => {
         User.find({}, (err, users) => {
             if(err) {
-                return err;
+                res.send(err);
             } else {
                 res.json(users);
             }
         })
     })
 
+// User routes
 router.route('/:user_id')
     // View user
     .get(passport.authenticate('jwt', {session:false}), (req, res) => {
         User.findById({_id: req.params.user_id}, (err, user) => {
             if(err) {
-                return err;
+                res.send(err);
             } else {
                 res.json({
                     user: {
@@ -59,8 +52,8 @@ router.route('/:user_id')
                         email: user.email
                     }
                 });
-            }
-        })
+            };
+        });
     })
     // Update user
     .put(passport.authenticate('jwt', {session:false}), (req, res) => {
@@ -68,9 +61,10 @@ router.route('/:user_id')
         const password = req.body.password;
         req.body.password = bcrypt.hashSync(password);
 
+        // Save updated user
         User.findByIdAndUpdate({ _id: req.params.user_id }, req.body, { 'new': true }, (err, user) => {
             if(err) {
-                return err;
+                res.send(err);
             } else {
                 res.json({
                     success: true,
@@ -83,14 +77,14 @@ router.route('/:user_id')
                         email: user.email
                     }
                 });
-            }
+            };
         });
     })
     // Delete user
     .delete(passport.authenticate('jwt', {session:false}), (req, res) => {
         User.findByIdAndRemove({ _id: req.params.user_id }, (err, user) => {
             if(err) {
-                return err;
+                res.send(err);
             } else {
                 res.json({
                     success: true,
@@ -103,8 +97,8 @@ router.route('/:user_id')
                         email: user.email
                     }
                 });
-            }
-        })
+            };
+        });
     });
 
 module.exports = router;

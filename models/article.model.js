@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Create Article schema
 const ArticleSchema = new Schema({
     title: String,
     excerpt: String,
@@ -15,16 +16,16 @@ const ArticleSchema = new Schema({
         type: Date,
         default: Date.now
     }
-})
+});
 
-// Custom Article methods
+// Custom ArticleSchema methods
 ArticleSchema.statics.getArticleById = function(id, callback){
     this.findOne(id, callback);
-}
+};
 ArticleSchema.statics.getArticleByTitle = function(title, callback) {
     query = {title: title};
     this.findOne(query, callback);
-}
+};
 
 // Export Article model
 module.exports = mongoose.model('Article', ArticleSchema);

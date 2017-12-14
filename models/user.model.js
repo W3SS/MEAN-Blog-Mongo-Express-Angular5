@@ -1,9 +1,12 @@
+// Load dependencies
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 
+// Mongoose promise
 mongoose.Promise = global.Promise;
-  
+
+// Create User schema
 const UserSchema = new Schema({
     firstName: {
         type: String,
@@ -30,6 +33,7 @@ const UserSchema = new Schema({
     }
 });
 
+// User pre-save middleware
 UserSchema.pre('save', function(next) {
     let newUser = this;
 
@@ -46,14 +50,14 @@ UserSchema.pre('save', function(next) {
     }
 });
 
-// Custom User methods
+// Custom UserSchema methods
 UserSchema.statics.getUserById = function(id, callback){
     this.findById(id, callback);
-}
+};
 UserSchema.statics.getUserByUsername = function(username, callback) {
     const query = {username: username};
     this.findOne(query, callback);
-}
+};
 UserSchema.statics.comparePassword = function(candidatePassword, hash, callback){
     bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
         if(err) {
@@ -61,6 +65,6 @@ UserSchema.statics.comparePassword = function(candidatePassword, hash, callback)
         }
         callback(null, isMatch);
     });
-}
+};
 
-module.exports = mongoose.model('User', UserSchema)
+module.exports = mongoose.model('User', UserSchema);

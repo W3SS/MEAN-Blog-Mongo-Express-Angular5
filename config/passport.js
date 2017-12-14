@@ -1,10 +1,14 @@
+// Load dependencies
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
+// Load User model
 const User = require('../models/user.model');
 
+// Load config file
 const config = require('../config/database');
 
+// Export the function
 module.exports = function(passport) {
     const opts = {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
