@@ -46,7 +46,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegisterSubmit() {
-    //console.log(this.registerForm.controls)
+    // Iterate over the form controls 
+    Object.keys( this.registerForm.controls).forEach(key => {
+      this.registerForm.controls[key].markAsDirty();
+   });
   }
 
   ngOnInit() {

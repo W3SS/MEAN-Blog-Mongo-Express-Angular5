@@ -1,6 +1,7 @@
 <h2>Register Form</h2>
 
 <form [formGroup]="registerForm" (submit)="onRegisterSubmit()" autocomplete="off">
+    <!-- firstName -->
     <div class="form-group required">
         <label class="col-form-label" for="firstName">First Name</label>
         <input type="text" name="firstName" class="form-control  has-error" placeholder="First Name" formControlName="firstName"
@@ -8,6 +9,7 @@
             [ngClass]="{'is-invalid': (registerForm.controls.firstName.errors && registerForm.controls.firstName.dirty)}">
             <div class="invalid-feedback">Please provide your first name.</div>
     </div>
+    <!-- lastName -->
     <div class="form-group required">
         <label class="col-form-label" for="lastName">Last Name</label>
         <input type="text" name="lastName" class="form-control" placeholder="Last Name" formControlName="lastName"
@@ -15,6 +17,7 @@
             [ngClass]="{'is-invalid': (registerForm.controls.lastName.errors && registerForm.controls.lastName.dirty)}">
             <div class="invalid-feedback">Please provide your last name.</div>
     </div>
+    <!-- email -->
     <div class="form-group required">
         <label class="col-form-label" for="email">Email</label>
         <input type="text" name="email" class="form-control" placeholder="Email" formControlName="email"
@@ -24,6 +27,7 @@
             <div class="invalid-feedback">Please provide a valid email.</div>
 
     </div>
+    <!-- Username -->
     <div class="form-group required">
         <label class="col-form-label" for="username">Username</label>
         <input type="text" name="username" class="form-control" placeholder="Username" formControlName="username"
@@ -33,6 +37,7 @@
             <div class="invalid-feedback">Please provide an username.</div>
 
     </div>
+    <!-- password -->
     <div class="form-group required">
         <label class="col-form-label" for="password">Password</label>
         <input type="text" name="password" class="form-control" placeholder="Password" formControlName="password"
@@ -43,6 +48,7 @@
             <div *ngIf="registerForm.controls.password.errors?.pattern" class="invalid-feedback">The password must be at least 8 characters long and contain at least one uppercase, one lowercase and one number.</div>
 
     </div>
+    <!-- password2 -->
     <div class="form-group required">
         <label class="col-form-label" for="password2">Confirm Password</label>
         <input type="text" name="password2" class="form-control" placeholder="Confirm password" formControlName="password2"
@@ -52,5 +58,5 @@
             <div *ngIf="registerForm.controls.password2.errors?.required" class="invalid-feedback">Please confirm your password.</div>
             <div *ngIf="registerForm.errors?.matchingPasswords" class="invalid-feedback">Paswords do not match.</div>
     </div>
-    <input class="btn btn-primary" type="submit" value="Register" [disabled]="!registerForm.valid">
+    <input class="btn btn-primary" type="submit" value="Register">
  </form>
