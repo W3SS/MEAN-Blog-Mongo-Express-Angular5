@@ -1,0 +1,56 @@
+<h2>Register Form</h2>
+
+<form [formGroup]="registerForm" (submit)="onRegisterSubmit()" autocomplete="off">
+    <div class="form-group required">
+        <label class="col-form-label" for="firstName">First Name</label>
+        <input type="text" name="firstName" class="form-control  has-error" placeholder="First Name" formControlName="firstName"
+
+            [ngClass]="{'is-invalid': (registerForm.controls.firstName.errors && registerForm.controls.firstName.dirty)}">
+            <div class="invalid-feedback">Please provide your first name.</div>
+    </div>
+    <div class="form-group required">
+        <label class="col-form-label" for="lastName">Last Name</label>
+        <input type="text" name="lastName" class="form-control" placeholder="Last Name" formControlName="lastName"
+
+            [ngClass]="{'is-invalid': (registerForm.controls.lastName.errors && registerForm.controls.lastName.dirty)}">
+            <div class="invalid-feedback">Please provide your last name.</div>
+    </div>
+    <div class="form-group required">
+        <label class="col-form-label" for="email">Email</label>
+        <input type="text" name="email" class="form-control" placeholder="Email" formControlName="email"
+
+            [ngClass]="{'is-invalid': (registerForm.controls.email.errors && registerForm.controls.email.dirty)}">
+
+            <div class="invalid-feedback">Please provide a valid email.</div>
+
+    </div>
+    <div class="form-group required">
+        <label class="col-form-label" for="username">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="Username" formControlName="username"
+
+            [ngClass]="{'is-invalid': (registerForm.controls.username.errors && registerForm.controls.username.dirty)}">
+
+            <div class="invalid-feedback">Please provide an username.</div>
+
+    </div>
+    <div class="form-group required">
+        <label class="col-form-label" for="password">Password</label>
+        <input type="text" name="password" class="form-control" placeholder="Password" formControlName="password"
+
+            [ngClass]="{'is-invalid': (registerForm.controls.password.errors && registerForm.controls.password.dirty)}">
+
+            <div *ngIf="registerForm.controls.password.errors?.required" class="invalid-feedback">Please provide a password.</div>
+            <div *ngIf="registerForm.controls.password.errors?.pattern" class="invalid-feedback">The password must be at least 8 characters long and contain at least one uppercase, one lowercase and one number.</div>
+
+    </div>
+    <div class="form-group required">
+        <label class="col-form-label" for="password2">Confirm Password</label>
+        <input type="text" name="password2" class="form-control" placeholder="Confirm password" formControlName="password2"
+
+            [ngClass]="{'is-invalid': (registerForm.controls.password2.errors && registerForm.controls.password2.dirty)}">
+
+            <div *ngIf="registerForm.controls.password2.errors?.required" class="invalid-feedback">Please confirm your password.</div>
+            <div *ngIf="registerForm.errors?.matchingPasswords" class="invalid-feedback">Paswords do not match.</div>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Register" [disabled]="!registerForm.valid">
+ </form>

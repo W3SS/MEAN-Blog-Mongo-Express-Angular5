@@ -19,7 +19,7 @@ exports.registerUser = function(req, res) {
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('password', 'Passwords must be at least 8 characters long').isLength({ min: 8 })
+    req.checkBody('password', 'Passwords must be at least 8 characters and maximum 35 characters long').isLength({ min: 8, max:35 })
     req.checkBody('password', 'Password must contain at least one number and one uppercase').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, 'i');
     req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
     
