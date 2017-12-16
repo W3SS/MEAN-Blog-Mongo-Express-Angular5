@@ -42,7 +42,7 @@ exports.registerUser = function(req, res) {
             } else {
                 res.json({
                     success: true, 
-                    message: 'You are now registered',
+                    message: 'You are now registered and can log in',
                     user: {
                         id: user._id,
                         firstName: user.firstName,
@@ -66,7 +66,8 @@ exports.authenticateUser = function(req, res) {
     var errors = req.validationErrors();
 
     if(errors){
-        res.json({errors:errors});
+        //res.json({errors:errors});
+        res.json({success: false, message: 'Username and email are required'})
     } else {
         const username = req.body.username;
         const password = req.body.password;
@@ -100,7 +101,7 @@ exports.authenticateUser = function(req, res) {
                             }
                         });
                     } else {
-                        res.json({success: false, message: 'Wrong password'});
+                        res.json({success: false, message: 'Incorrect password'});
                     };
                 });
             };

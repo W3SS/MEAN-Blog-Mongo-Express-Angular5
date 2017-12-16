@@ -1,3 +1,32 @@
-<p>
-  login works!
-</p>
+<h2>Login</h2>
+
+<div [ngClass]="messageClass">
+  {{ message }}
+</div>
+
+<form [formGroup]="loginForm" (submit)="onLoginSubmit()" autocomplete="off">
+
+    <!-- Username -->
+    <div class="form-group required">
+        <label class="col-form-label" for="username">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="Username" formControlName="username"
+
+            [ngClass]="{'is-invalid': (loginForm.controls.username.errors && loginForm.controls.username.dirty)}">
+
+            <div class="invalid-feedback">Please provide your username.</div>
+
+    </div>
+    <!-- password -->
+    <div class="form-group required">
+        <label class="col-form-label" for="password">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" formControlName="password"
+
+            [ngClass]="{'is-invalid': (loginForm.controls.password.errors && loginForm.controls.password.dirty)}">
+
+            <div *ngIf="loginForm.controls.password.errors?.required" class="invalid-feedback">Please provide your password.</div>
+    </div>
+
+    <input [disabled]='formSubmitted' class="btn btn-primary" type="submit" value="Login">
+
+</form>
+  

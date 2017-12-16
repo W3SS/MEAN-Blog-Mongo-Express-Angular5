@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
 
 import { AuthService } from "../../services/auth.service";
-import { attachEmbeddedView } from '@angular/core/src/view/view_attach';
 import { matchingPasswords } from '../../validators/validators';
 
 @Component({
@@ -15,14 +15,14 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   message;
   messageClass;
-  formSubmitted = false;
+  formSubmitted: Boolean = false;
 
   data = <any>{};
   
-
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { 
     this.createForm();
    }
@@ -46,20 +46,7 @@ export class RegisterComponent implements OnInit {
     },{validator: matchingPasswords('password', 'confirmPassword')});
   }
 
-  matchingPasswords(password, password2) {
-    return (group: FormGroup) => {
-      if(group.controls.password.value === group.controls.password2.value) {
-        console.log(group);
-        return null
-      } else {     
-        return({ 'matchingPasswords': true })
-      }
-    }
-  }
-
-
   onRegisterSubmit() {
-    this.formSubmitted = true;
 
     const user = {
       firstName: this.registerForm.get('firstName').value,
@@ -72,13 +59,17 @@ export class RegisterComponent implements OnInit {
 
     this.authService.registerUser(user).subscribe(data => {
       if(!data.success) {
-        this.message = data.message;
         this.messageClass = 'alert alert-danger';
+        this.message = data.message;
         this.formSubmitted = false;
       } else {
-        this.message = data.message;
         this.messageClass = 'alert alert-success';
+        this.message = data.message;
+        this.formSubmitted = true;
         this.disableForm();
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 2000);
       }
     });
 
