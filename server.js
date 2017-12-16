@@ -23,10 +23,14 @@ const articlesRoutes = require('./routes/articles.routes');
 // Body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
 
-// Log requests to console 
-// app.use(morgan('dev'));  //uncomment for development
+// Delete for production
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
+
+// Delete for production
+app.use(morgan('dev'));
 
 // Connect to database
 mongoose.Promise = global.Promise;

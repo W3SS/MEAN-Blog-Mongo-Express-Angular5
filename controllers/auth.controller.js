@@ -26,18 +26,23 @@ exports.registerUser = function(req, res) {
     var errors = req.validationErrors();
 
     if(errors){
-        res.json({errors:errors});
+        //res.json({errors:errors});
+        res.json({success: false, message: 'Please correct the errors'});
     } else {
         // Save new User
         const newUser = User(req.body);
 
         newUser.save(newUser, (err, user) => {
             if(err) {
-                res.send(err);
+                if(err.code === 11000) {
+                    res.json({ success: false, message: 'Username or email already exist' });
+                } else {
+                    res.json({success: false, message: 'There was an error'});
+                }
             } else {
                 res.json({
                     success: true, 
-                    message: 'User saved',
+                    message: 'You are now registered',
                     user: {
                         id: user._id,
                         firstName: user.firstName,
@@ -68,7 +73,7 @@ exports.authenticateUser = function(req, res) {
 
         User.getUserByUsername(username, (err, user) => {
             if(err) {
-                res.send(err);
+                res.json({success: false, message: 'There was an error'});
             } if(!user) {
                 res.json({success: false, message: 'User not found'});
             } else {
