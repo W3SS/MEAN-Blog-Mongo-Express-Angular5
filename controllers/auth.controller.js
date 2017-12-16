@@ -27,7 +27,7 @@ exports.registerUser = function(req, res) {
 
     if(errors){
         //res.json({errors:errors});
-        res.json({success: false, message: 'Please correct the errors'});
+        res.json({success: false, message: 'There are some errors in the form'});
     } else {
         // Save new User
         const newUser = User(req.body);

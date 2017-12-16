@@ -5,3 +5,9 @@
     color:red;
     font-weight: bold;
 }
+// adjust error mesage under the input field to match .invalid-feedback
+.form-group .input-error {
+    margin-top: .25rem;
+    font-size: .875rem;
+    color: #dc3545;
+}

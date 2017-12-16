@@ -17,7 +17,7 @@ export class AuthService {
           return res as Data;
         },
         err => {
-          console.log("Error occured");
+          console.log("There was an error");
         }
       );
     }    

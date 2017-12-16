@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from "../../services/auth.service";
 import { attachEmbeddedView } from '@angular/core/src/view/view_attach';
+import { matchingPasswords } from '../../validators/validators';
 
 @Component({
   selector: 'app-register',
@@ -41,21 +42,21 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(35),
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
       ])],
-      password2: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)])]
-    }, { validator: this.matchingPasswords( 'password', 'password2' )});
+      password2: ['', Validators.required]
+    },{validator: matchingPasswords('password', 'confirmPassword')});
   }
 
-  matchingPasswords(pasword, password2) {
+  matchingPasswords(password, password2) {
     return (group: FormGroup) => {
       if(group.controls.password.value === group.controls.password2.value) {
-        return null;
-      } else {
+        console.log(group);
+        return null
+      } else {     
         return({ 'matchingPasswords': true })
       }
     }
   }
+
 
   onRegisterSubmit() {
     this.formSubmitted = true;
