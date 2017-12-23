@@ -1,4 +1,4 @@
-<h2>Register Form</h2>
+<h2>Registration Form</h2>
 
 <div [ngClass]="messageClass">
     {{ message }}
@@ -57,7 +57,7 @@
         <label class="col-form-label" for="password2">Confirm Password</label>
         <input type="password" name="password2" class="form-control" placeholder="Confirm password" formControlName="password2"
 
-            [ngClass]="{'is-invalid': (registerForm.controls.password2.errors && registerForm.controls.password2.dirty)}">
+            [ngClass]="{'is-invalid': (registerForm.controls.password2.errors && registerForm.controls.password2.dirty || registerForm.errors?.matchingPasswords && registerForm.controls.password2.dirty)}">
 
             <div *ngIf="registerForm.controls.password2.errors?.required" class="invalid-feedback">Please confirm your password.</div>
             <div *ngIf="registerForm.errors?.matchingPasswords" class="text-danger input-error">Paswords do not match.</div>

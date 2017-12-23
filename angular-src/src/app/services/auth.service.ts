@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Data } from '@angular/router/src/config';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 
 export class AuthService {
   authToken;
   user;
+  options;
 
   domain = 'http://localhost:8080';
 
@@ -37,10 +40,36 @@ export class AuthService {
         }
       )
     }
+
+    logoutUser() {
+      this.authToken = null;
+      this.user = null;
+      localStorage.clear();
+    }
+
+    loggedIn() {
+      return tokenNotExpired('my-blog-token');
+    }
+
+    getUsers() {
+      return this.http.get(this.domain + '/api/users')
+      .map(
+        res => {
+          return res as Data;
+        },
+        err => {
+          console.log("There was an error");
+        }
+      )
+    }
+
+    getAuthHeader() {
+
+    }
     
     storeUserData(token, user) {
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('my-blog-token', token);
+      localStorage.setItem('blog-user', JSON.stringify(user));
       this.authToken = token;
       this.user = user;
     }

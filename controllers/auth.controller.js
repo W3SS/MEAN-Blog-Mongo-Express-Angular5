@@ -67,7 +67,7 @@ exports.authenticateUser = function(req, res) {
 
     if(errors){
         //res.json({errors:errors});
-        res.json({success: false, message: 'Username and email are required'})
+        res.json({success: false, message: 'Please provide username and password'})
     } else {
         const username = req.body.username;
         const password = req.body.password;

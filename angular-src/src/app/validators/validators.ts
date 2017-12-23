@@ -12,4 +12,3 @@ export function matchingPasswords(passwordKey: string, confirmPasswordKey: strin
         }
     }
 }
-  
