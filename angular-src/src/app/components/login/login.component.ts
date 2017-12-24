@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
         this.message = data.message;
         this.authService.storeUserData(data.token, data.user);
         setTimeout(() => {
-          this.router.navigate(['/About']);
+          this.router.navigate(['dashboard']);
         }, 2000)
       }
     })
