@@ -11,3 +11,8 @@
     font-size: .875rem;
     color: #dc3545;
 }
+
+// Flash messages margin fix
+flash-messages p {
+    margin-bottom: 0;
+}

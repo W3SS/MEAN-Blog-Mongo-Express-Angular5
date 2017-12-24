@@ -3,11 +3,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from "./app.routing";
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FlashMessagesModule } from "angular2-flash-messages";
 
 import { AppComponent } from './app.component';
 
 import { AuthService } from "./services/auth.service";
-import { AuthInterceptor } from './services/auth.interceptor'
+import { AuthInterceptor } from './services/auth.interceptor';
+import { AuthGuard } from "./guards/auth.guard";
+import { NotAuthGuard } from "./guards/not-auth.guard";
 
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -35,10 +38,13 @@ import { BlogComponent } from './components/blog/blog.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FlashMessagesModule.forRoot()
   ],
   providers: [
     AuthService,
+    AuthGuard,
+    NotAuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
