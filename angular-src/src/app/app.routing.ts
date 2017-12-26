@@ -15,7 +15,7 @@ const appRoutes = [
     { path: '', component: HomeComponent },
     { path: 'home', redirectTo: '/', pathMatch: 'full' },
     { path: 'blog', component: BlogComponent },
-    { path: 'about', component: AboutComponent },
+    { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
     { path: 'contact', component: ContactComponent },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] },

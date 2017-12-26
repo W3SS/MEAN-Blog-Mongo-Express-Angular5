@@ -21,4 +21,3 @@ export class NotAuthGuard implements CanActivate {
       }
   }
 }
-}
