@@ -35,13 +35,13 @@ router.route('/')
         })
     })
 
-// User routes
+// User routes :user_id
 router.route('/:user_id')
     // View user
     .get(passport.authenticate('jwt', {session:false}), (req, res) => {
         User.findById({_id: req.params.user_id}, (err, user) => {
             if(err) {
-                res.send(err);
+                res.json({ success: false, message: 'Invalid user id' });
             } else {
                 res.json({
                     user: {

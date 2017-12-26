@@ -7,16 +7,11 @@ import { AuthService } from "../../services/auth.service";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  users: any;
 
   constructor(
     private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.authService.getUsers().subscribe(dashboard => {
-     console.log(dashboard)
-    });
   }
-
 }

@@ -51,21 +51,31 @@ export class AuthService {
       return tokenNotExpired('my-blog-token');
     }
 
+    getUser(userId) {
+      return this.http.get(this.domain + '/api/users/' + userId)
+        .map(
+          res => {
+            return res as Data;
+          },
+          err => {
+            console.log("There was an error");
+          }
+        )
+    }
+
     getUsers() {
       return this.http.get(this.domain + '/api/users')
-      .map(
-        res => {
-          return res as Data;
-        },
-        err => {
-          console.log("There was an error");
-        }
-      )
+        .map(
+          res => {
+            return res as Data;
+          },
+          err => {
+            console.log("There was an error");
+          }
+        )
     }
 
-    getAuthHeader() {
-
-    }
+    getAuthHeader() {}
     
     storeUserData(token, user) {
       localStorage.setItem('my-blog-token', token);

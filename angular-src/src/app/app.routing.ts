@@ -9,6 +9,7 @@ import { ContactComponent } from "./components/contact/contact.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { LoginComponent } from "./components/login/login.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { ProfileComponent } from "./components/profile/profile.component";
 import { BlogComponent } from "./components/blog/blog.component";
 
 const appRoutes = [
@@ -17,6 +18,7 @@ const appRoutes = [
     { path: 'blog', component: BlogComponent },
     { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
     { path: 'contact', component: ContactComponent },
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] },
     { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
