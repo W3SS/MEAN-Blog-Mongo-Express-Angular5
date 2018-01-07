@@ -8,15 +8,17 @@ const jwt = require('jsonwebtoken');
 const Article = require('../models/article.model');
 
 // Articles routes
-router.route('/')
+ router.route('/')
     // Get articles
     .get((req, res) => {
-        Article.find({}, (err, articles) => {
+        Article.find({})
+        .populate('author')
+        .exec((err, articulos) => {
             if(err) {
-                res.send(err);
+                res.json(err)
             } else {
-                res.json(articles);
-            };
+                res.json(articulos)
+            }
         });
     })
     // Create article
@@ -32,7 +34,12 @@ router.route('/')
             res.json({errors:errors});
         } else {
             // Save Article
-            const newArticle = Article(req.body);
+            const newArticle = new Article({
+                title: req.body.title,
+                excerpt: req.body.excerpt,
+                body: req.body.body,
+                author: req.user._id
+            });
 
             newArticle.save(newArticle, (err, article) => {
                 if(err) {

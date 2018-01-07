@@ -2,6 +2,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Load user model
+const User = require('../models/user.model');
+
 // Create Article schema
 const ArticleSchema = new Schema({
     title: String,
@@ -9,7 +12,7 @@ const ArticleSchema = new Schema({
     body: String,
     tags: [],
     author: {
-        type: Schema.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     created: {

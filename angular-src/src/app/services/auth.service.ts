@@ -74,8 +74,6 @@ export class AuthService {
           }
         )
     }
-
-    getAuthHeader() {}
     
     storeUserData(token, user) {
       localStorage.setItem('my-blog-token', token);

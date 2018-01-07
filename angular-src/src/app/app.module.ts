@@ -11,6 +11,7 @@ import { AuthService } from "./services/auth.service";
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthGuard } from "./guards/auth.guard";
 import { NotAuthGuard } from "./guards/not-auth.guard";
+import { BlogService } from "./services/blog.service";
 
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -21,6 +22,8 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CreatePostComponent } from './components/blog/create-post/create-post.component';
+import { EditPostComponent } from './components/blog/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     RegisterComponent,
     DashboardComponent,
     BlogComponent,
-    ProfileComponent
+    ProfileComponent,
+    CreatePostComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +52,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     AuthService,
     AuthGuard,
     NotAuthGuard,
+    BlogService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
