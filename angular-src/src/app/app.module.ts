@@ -24,6 +24,7 @@ import { BlogComponent } from './components/blog/blog.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CreatePostComponent } from './components/blog/create-post/create-post.component';
 import { EditPostComponent } from './components/blog/edit-post/edit-post.component';
+import { ViewPostComponent } from './components/blog/view-post/view-post.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { EditPostComponent } from './components/blog/edit-post/edit-post.compone
     BlogComponent,
     ProfileComponent,
     CreatePostComponent,
-    EditPostComponent
+    EditPostComponent,
+    ViewPostComponent
   ],
   imports: [
     BrowserModule,

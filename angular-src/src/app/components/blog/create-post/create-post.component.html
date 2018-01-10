@@ -24,11 +24,12 @@
   <!-- body -->
   <div class="form-group required">
       <label class="col-form-label" for="body">Body</label>
-      <input type="text" name="body" class="form-control" placeholder="Body" formControlName="body"
+      <textarea type="text" name="body" class="form-control" placeholder="Body" formControlName="body"
 
           [ngClass]="{'is-invalid': (createPostForm.controls.body.errors && createPostForm.controls.body.dirty)}">
 
           <div class="invalid-feedback">Please provide the body.</div>
+        </textarea>
 
   </div>
 

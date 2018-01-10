@@ -11,15 +11,19 @@ import { LoginComponent } from "./components/login/login.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { BlogComponent } from "./components/blog/blog.component";
-import { CreatePostComponent } from './components/blog/create-post/create-post.component'
+import { EditPostComponent } from './components/blog/edit-post/edit-post.component';
+import { CreatePostComponent } from './components/blog/create-post/create-post.component';
+import { ViewPostComponent } from './components/blog/view-post/view-post.component';
+
 
 const appRoutes = [
     { path: '', component: HomeComponent },
     { path: 'home', redirectTo: '/', pathMatch: 'full' },
     { path: 'blog', children: [
-        {path: '', component: BlogComponent},
-        {path: 'create-post', component: CreatePostComponent},
-        {path: 'create-post', component: CreatePostComponent}
+        { path: '', component: BlogComponent },
+        { path: 'create-post', component: CreatePostComponent },
+        { path: 'post/:id', component: ViewPostComponent },
+        { path: 'edit-post/:id', component: EditPostComponent, canActivate: [AuthGuard] }
     ] },
     { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
     { path: 'contact', component: ContactComponent },

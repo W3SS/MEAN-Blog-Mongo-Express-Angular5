@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+
 import { BlogService } from "../../../services/blog.service";
 
 @Component({
@@ -11,8 +12,8 @@ import { BlogService } from "../../../services/blog.service";
 export class CreatePostComponent implements OnInit {
 
   createPostForm: FormGroup;
-  message;
-  messageClass;
+  message: String;
+  messageClass: String;
   formSubmitted: Boolean = false;
 
   constructor(

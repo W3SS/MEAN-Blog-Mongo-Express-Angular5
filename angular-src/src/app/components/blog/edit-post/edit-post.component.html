@@ -1,3 +1,42 @@
-<p>
-  edit-post works!
-</p>
+<h2>Edit Post</h2>
+
+<div [ngClass]="messageClass">
+  {{ message }}
+</div>
+
+<form [formGroup]="createPostForm" (submit)="onPostSubmit()" autocomplete="off">
+  <!-- title -->
+  <div class="form-group required">
+      <label class="col-form-label" for="title">Title</label>
+      <input type="text" name="title" class="form-control  has-error" placeholder="{{article?.title}}" formControlName="title"
+
+          [ngClass]="{'is-invalid': (createPostForm.controls.title.errors && createPostForm.controls.title.dirty)}">
+          <div class="invalid-feedback">Please provide the title.</div>
+  </div>
+  <!-- excerpt -->
+  <div class="form-group required">
+      <label class="col-form-label" for="excerpt">Excerpt</label>
+      <input type="text" name="excerpt" class="form-control" placeholder="{{article?.excerpt}}" formControlName="excerpt"
+
+          [ngClass]="{'is-invalid': (createPostForm.controls.excerpt.errors && createPostForm.controls.excerpt.dirty)}">
+          <div class="invalid-feedback">Please provide the excerpt.</div>
+  </div>
+  <!-- body -->
+  <div class="form-group required">
+      <label class="col-form-label" for="body">Body</label>
+      <textarea type="text" name="body" class="form-control" placeholder="{{article?.body}}" formControlName="body"
+
+          [ngClass]="{'is-invalid': (createPostForm.controls.body.errors && createPostForm.controls.body.dirty)}">
+
+          <div class="invalid-feedback">Please provide the body.</div>
+        </textarea>
+
+  </div>
+
+  <!-- tags -->
+
+  <input [disabled]='formSubmitted' class="btn btn-primary" type="submit" value="Publish post">
+
+</form>
+
+<button class="btn btn-outline-danger" (click)="onPostDelete()">Delete Post</button>
