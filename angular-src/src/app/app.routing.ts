@@ -14,7 +14,7 @@ import { BlogComponent } from "./components/blog/blog.component";
 import { EditPostComponent } from './components/blog/edit-post/edit-post.component';
 import { CreatePostComponent } from './components/blog/create-post/create-post.component';
 import { ViewPostComponent } from './components/blog/view-post/view-post.component';
-
+import { SearchComponent } from './components/search/search.component';
 
 const appRoutes = [
     { path: '', component: HomeComponent },
@@ -29,8 +29,9 @@ const appRoutes = [
     { path: 'contact', component: ContactComponent },
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-    { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] },
+    { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
+    { path: 'search', component: SearchComponent },
     { path: '**', component: HomeComponent}
 ]
 

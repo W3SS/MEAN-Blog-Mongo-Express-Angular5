@@ -4,11 +4,11 @@
   {{ message }}
 </div>
 
-<form [formGroup]="createPostForm" (submit)="onPostSubmit()" autocomplete="off">
+<form *ngIf="article" [formGroup]="createPostForm" (submit)="onPostSubmit()" autocomplete="off">
   <!-- title -->
   <div class="form-group required">
       <label class="col-form-label" for="title">Title</label>
-      <input type="text" name="title" class="form-control  has-error" placeholder="{{article?.title}}" formControlName="title"
+      <input [(ngModel)]="article.title" formControlName="title" type="text" name="title" class="form-control  has-error"
 
           [ngClass]="{'is-invalid': (createPostForm.controls.title.errors && createPostForm.controls.title.dirty)}">
           <div class="invalid-feedback">Please provide the title.</div>
@@ -16,7 +16,7 @@
   <!-- excerpt -->
   <div class="form-group required">
       <label class="col-form-label" for="excerpt">Excerpt</label>
-      <input type="text" name="excerpt" class="form-control" placeholder="{{article?.excerpt}}" formControlName="excerpt"
+      <input [(ngModel)]="article.excerpt" formControlName="excerpt" type="text" name="excerpt" class="form-control" value=""
 
           [ngClass]="{'is-invalid': (createPostForm.controls.excerpt.errors && createPostForm.controls.excerpt.dirty)}">
           <div class="invalid-feedback">Please provide the excerpt.</div>
@@ -24,19 +24,44 @@
   <!-- body -->
   <div class="form-group required">
       <label class="col-form-label" for="body">Body</label>
-      <textarea type="text" name="body" class="form-control" placeholder="{{article?.body}}" formControlName="body"
+      <textarea [(ngModel)]="article.body" formControlName="body" type="text" name="body" class="form-control" value=""
 
           [ngClass]="{'is-invalid': (createPostForm.controls.body.errors && createPostForm.controls.body.dirty)}">
-
-          <div class="invalid-feedback">Please provide the body.</div>
         </textarea>
+
+        <div class="invalid-feedback">Please provide the body.</div>
 
   </div>
 
   <!-- tags -->
-
-  <input [disabled]='formSubmitted' class="btn btn-primary" type="submit" value="Publish post">
+  <input [disabled]='formSubmitted' class="btn btn-primary" type="submit" value="Save article">
 
 </form>
-
+<br>
+<button class="btn btn-primary" (click)="goBack()">&larr; Go back</button>
+<br><br>
 <button class="btn btn-outline-danger" (click)="onPostDelete()">Delete Post</button>
+<br><br>
+
+<!-- preview -->
+<div *ngIf="article">
+
+    <h2>Article preview:</h2>
+    <h5>{{article.title}}</h5>
+    <div><i>{{article.excerpt}}</i></div><br>
+    <div>{{article.body}}</div>
+    <br>
+    <div>
+        <p>
+            Tags: <span *ngFor="let tag of article.tags" class="badge badge-secondary">{{tag}}</span>
+        </p>
+    </div>
+    
+    <br>
+    <button class="btn btn-primary" (click)="onPostSubmit()">Save article</button>
+    <br><br>
+    <button class="btn btn-primary" (click)="goBack()">&larr; Go back</button>
+    <br><br>
+    <button class="btn btn-outline-danger" (click)="onPostDelete()">Delete Post</button>
+
+</div>

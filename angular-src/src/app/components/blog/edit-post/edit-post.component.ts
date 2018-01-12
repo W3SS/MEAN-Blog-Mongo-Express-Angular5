@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from "@angular/router";
+import { Location } from '@angular/common';
 
 import { BlogService } from "../../../services/blog.service";
+import { Article } from "../../../models/article";
 
 @Component({
   selector: 'app-edit-post',
@@ -17,15 +19,19 @@ export class EditPostComponent implements OnInit {
   message: String;
   messageClass: String;
   formSubmitted: Boolean = false;
+  
   article: any;
 
   constructor(
+    private location: Location,
     private formBuilder: FormBuilder,
     private router: Router,
     private blogService: BlogService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private changeDetectionRef: ChangeDetectorRef
   ) { 
     this.createForm();
+    
    }
 
    createForm() {
@@ -34,10 +40,11 @@ export class EditPostComponent implements OnInit {
       excerpt: ['', Validators.required],
       body: ['', Validators.required]
     })
-  }
-
-  onPostSubmit() {
     
+  }
+  
+  onPostSubmit() {
+
     const newArticle = {
       title: this.createPostForm.get('title').value,
       excerpt: this.createPostForm.get('excerpt').value,
@@ -85,11 +92,16 @@ export class EditPostComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.location.back();
+  }
+
   ngOnInit() {
     this.urlParam = this.activatedRoute.snapshot.params;
 
     this.blogService.getArticle(this.urlParam.id)
-      .subscribe(data =>this.article = data);
+      .subscribe(data => {this.article = data});
+
   }
 
 }

@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Generic
+body {
+    padding-bottom: 20px;
+}
+
 // Bootstrap teaks
 .form-group.required label:after {
     content:" *";
@@ -10,6 +16,9 @@
     margin-top: .25rem;
     font-size: .875rem;
     color: #dc3545;
+}
+a:hover, button:hover, input[type=submit]:hover {
+    cursor: pointer;
 }
 
 // Flash messages margin fix

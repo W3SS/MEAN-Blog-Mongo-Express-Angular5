@@ -59,12 +59,14 @@ const Article = require('../models/article.model');
 router.route('/:article_id')
     // Get article
     .get((req, res) => {
-        Article.findById({_id: req.params.article_id}, (err, article) => {
+        Article.findById({_id: req.params.article_id})
+        .populate('author')
+        .exec((err, articulos) => {
             if(err) {
-                res.send(err);
+                res.json(err)
             } else {
-                res.json(article);
-            };
+                res.json(articulos)
+            }
         });
     })
     // Update article

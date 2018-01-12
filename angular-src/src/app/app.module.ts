@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
 import { AppRoutingModule } from "./app.routing";
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlashMessagesModule } from "angular2-flash-messages";
 
@@ -25,6 +25,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CreatePostComponent } from './components/blog/create-post/create-post.component';
 import { EditPostComponent } from './components/blog/edit-post/edit-post.component';
 import { ViewPostComponent } from './components/blog/view-post/view-post.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ViewPostComponent } from './components/blog/view-post/view-post.compone
     ProfileComponent,
     CreatePostComponent,
     EditPostComponent,
-    ViewPostComponent
+    ViewPostComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -64,3 +66,4 @@ import { ViewPostComponent } from './components/blog/view-post/view-post.compone
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+//enableProdMode();

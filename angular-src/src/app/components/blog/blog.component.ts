@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from "../../services/blog.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-blog',
@@ -19,7 +20,7 @@ import { BlogService } from "../../services/blog.service";
         </div>
     
         <a [routerLink]="['/blog/post/', article._id]" class="btn btn-primary">Read post</a>
-        <a [routerLink]="['/blog/edit-post/', article._id]" class="btn btn-outline-warning">Edit post</a>
+        <a *ngIf="authService.loggedIn()" [routerLink]="['/blog/edit-post/', article._id]" class="btn btn-outline-warning">Edit post</a>
     </div>
   `
 })
@@ -29,13 +30,13 @@ export class BlogComponent implements OnInit {
   article
 
   constructor(
-    private blogService: BlogService
+    private blogService: BlogService,
+    private authService: AuthService
   ) { }
 
-
   ngOnInit() {
-     this.blogService.getArticles().subscribe(articles => {
-      this.articles = articles;
+    this.blogService.getArticles().subscribe(data => {
+      this.articles = data;
     }) 
   }
 }
