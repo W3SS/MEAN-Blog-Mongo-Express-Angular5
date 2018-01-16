@@ -21,6 +21,8 @@ const ArticleSchema = new Schema({
     }
 });
 
+// ArticleSchema.index({title: 'text'});
+
 // Custom ArticleSchema methods
 ArticleSchema.statics.getArticleById = function(id, callback){
     this.findOne(id, callback);

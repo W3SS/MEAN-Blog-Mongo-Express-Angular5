@@ -37,6 +37,8 @@ export class BlogComponent implements OnInit {
   ngOnInit() {
     this.blogService.getArticles().subscribe(data => {
       this.articles = data;
-    }) 
+      this.articles.sort((a: any, b: any) => 
+      new Date(b.created).getTime() - new Date(a.created).getTime());
+    });
   }
 }

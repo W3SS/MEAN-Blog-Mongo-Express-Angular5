@@ -12,6 +12,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthGuard } from "./guards/auth.guard";
 import { NotAuthGuard } from "./guards/not-auth.guard";
 import { BlogService } from "./services/blog.service";
+import { SearchService } from "./services/search.service";
 
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -57,6 +58,7 @@ import { SearchComponent } from './components/search/search.component';
     AuthGuard,
     NotAuthGuard,
     BlogService,
+    SearchService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

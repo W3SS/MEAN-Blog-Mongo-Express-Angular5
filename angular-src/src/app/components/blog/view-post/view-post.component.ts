@@ -46,5 +46,6 @@ export class ViewPostComponent implements OnInit {
       .subscribe(data => {
         this.article = data;
       });
+      
   }
 }

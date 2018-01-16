@@ -19,6 +19,7 @@ const port = 8080;
 // Load routes
 const usersRoutes = require('./routes/users.routes');
 const articlesRoutes = require('./routes/articles.routes');
+const searchRoutes = require('./routes/search.routes');
 
 // Body parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -65,7 +66,8 @@ require('./config/passport.js')(passport);
 
 // Routes
 app.use('/api/users', usersRoutes);
-app.use('/api/articles', articlesRoutes)
+app.use('/api/articles', articlesRoutes);
+app.use("/api/search", searchRoutes);
 app.use('*', (req, res) => {
     res.send('Invalid Endpoint');
 });
