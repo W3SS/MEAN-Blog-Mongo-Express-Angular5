@@ -19,7 +19,7 @@ export class EditPostComponent implements OnInit {
   message: String;
   messageClass: String;
   formSubmitted: Boolean = false;
-  
+  tag: String;
   article: any;
 
   constructor(
@@ -38,17 +38,28 @@ export class EditPostComponent implements OnInit {
     this.createPostForm = this.formBuilder.group({
       title: ['', Validators.required],
       excerpt: ['', Validators.required],
-      body: ['', Validators.required]
+      body: ['', Validators.required],
+      tags: ['']
     })
-    
+  }
+
+  addTag(tag) {
+    this.article.tags.push(this.createPostForm.get('tags').value);
+    this.createPostForm.get('tags').reset();
+  }
+
+  deleteTag(tag:string, index) {
+    if (index !== -1) {
+        this.article.tags.splice(index, 1);
+    }  
   }
   
   onPostSubmit() {
-
     const newArticle = {
       title: this.createPostForm.get('title').value,
       excerpt: this.createPostForm.get('excerpt').value,
-      body: this.createPostForm.get('body').value
+      body: this.createPostForm.get('body').value,
+      tags: this.article.tags
     }
     
     this.blogService.updateArticle(this.urlParam.id, newArticle)
@@ -101,7 +112,5 @@ export class EditPostComponent implements OnInit {
 
     this.blogService.getArticle(this.urlParam.id)
       .subscribe(data => {this.article = data});
-
   }
-
 }

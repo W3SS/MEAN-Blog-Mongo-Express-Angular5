@@ -4,7 +4,7 @@
   {{ message }}
 </div>
 
-<form *ngIf="article" [formGroup]="createPostForm" (submit)="onPostSubmit()" autocomplete="off">
+<form *ngIf="article" [formGroup]="createPostForm" (submit)="onPostSubmit()" autocomplete="off" (keydown.enter)="$event.preventDefault()">
   <!-- title -->
   <div class="form-group required">
       <label class="col-form-label" for="title">Title</label>
@@ -34,6 +34,12 @@
   </div>
 
   <!-- tags -->
+  <label for="tags">Add tags</label>
+  <input type="text" name="tags" class="form-control"  placeholder="Add tag" formControlName="tags" (keyup.enter)="addTag()">
+  <p>
+      <span *ngFor="let tag of article.tags; let i = index"><span>{{tag}}</span> <span class="fa fa-times" (click)="deleteTag(tag, i)"></span> </span></p>
+
+
   <input [disabled]='formSubmitted' class="btn btn-primary" type="submit" value="Save article">
 
 </form>
@@ -41,7 +47,9 @@
 <button class="btn btn-primary" (click)="goBack()">&larr; Go back</button>
 <br><br>
 <button class="btn btn-outline-danger" (click)="onPostDelete()">Delete Post</button>
+
 <br><br>
+<hr>
 
 <!-- preview -->
 <div *ngIf="article">

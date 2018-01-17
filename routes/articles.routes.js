@@ -38,7 +38,8 @@ const Article = require('../models/article.model');
                 title: req.body.title,
                 excerpt: req.body.excerpt,
                 body: req.body.body,
-                author: req.user._id
+                author: req.user._id,
+                tags: req.body.tags
             });
 
             newArticle.save(newArticle, (err, article) => {

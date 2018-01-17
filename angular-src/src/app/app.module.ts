@@ -68,4 +68,4 @@ import { SearchComponent } from './components/search/search.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-//enableProdMode();
+enableProdMode();

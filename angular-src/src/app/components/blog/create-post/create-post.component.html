@@ -4,11 +4,11 @@
   {{ message }}
 </div>
 
-<form [formGroup]="createPostForm" (submit)="onPostSubmit()" autocomplete="off">
+<form *ngIf="article" [formGroup]="createPostForm" (submit)="onPostSubmit()" autocomplete="off" (keydown.enter)="$event.preventDefault()">
   <!-- title -->
   <div class="form-group required">
       <label class="col-form-label" for="title">Title</label>
-      <input type="text" name="title" class="form-control  has-error" placeholder="Title" formControlName="title"
+      <input [(ngModel)]="article.title" type="text" name="title" class="form-control  has-error" placeholder="Title" formControlName="title"
 
           [ngClass]="{'is-invalid': (createPostForm.controls.title.errors && createPostForm.controls.title.dirty)}">
           <div class="invalid-feedback">Please provide the title.</div>
@@ -16,7 +16,7 @@
   <!-- excerpt -->
   <div class="form-group required">
       <label class="col-form-label" for="excerpt">Excerpt</label>
-      <input type="text" name="excerpt" class="form-control" placeholder="Excerpt" formControlName="excerpt"
+      <input [(ngModel)]="article.excerpt" type="text" name="excerpt" class="form-control" placeholder="Excerpt" formControlName="excerpt"
 
           [ngClass]="{'is-invalid': (createPostForm.controls.excerpt.errors && createPostForm.controls.excerpt.dirty)}">
           <div class="invalid-feedback">Please provide the excerpt.</div>
@@ -24,16 +24,44 @@
   <!-- body -->
   <div class="form-group required">
       <label class="col-form-label" for="body">Body</label>
-      <textarea type="text" name="body" class="form-control" placeholder="Body" formControlName="body"
+      <textarea [(ngModel)]="article.body" type="text" name="body" class="form-control" placeholder="Body" formControlName="body"
 
           [ngClass]="{'is-invalid': (createPostForm.controls.body.errors && createPostForm.controls.body.dirty)}">
 
           <div class="invalid-feedback">Please provide the body.</div>
         </textarea>
-
   </div>
 
   <!-- tags -->
+  <label for="tags">Add tags</label>
+  <input type="text" name="tags" class="form-control"  placeholder="Add tag" formControlName="tags" (keyup.enter)="addTag()">
+  <p>
+      <span *ngFor="let tag of tags; let i = index"><span>{{tag}}</span> <span class="fa fa-times" (click)="deleteTag(tag, i)"></span> </span></p>
 
   <input [disabled]='formSubmitted' class="btn btn-primary" type="submit" value="Publish post">
+
 </form>
+
+<br>
+<hr>
+
+<!-- preview -->
+<div *ngIf="article">
+
+    <h2>Article preview:</h2>
+    <h5>{{article.title}}</h5>
+    <div><i>{{article.excerpt}}</i></div><br>
+    <div>{{article.body}}</div>
+    <br>
+    <div>
+        <p>Tags: <span *ngFor="let tag of tags; let i = index" class="badge badge-secondary"><span>{{tag}}</span></span></p>
+    </div>
+    
+    <br>
+    <button class="btn btn-primary" (click)="onPostSubmit()">Save article</button>
+    <br><br>
+    <button class="btn btn-primary" (click)="goBack()">&larr; Go back</button>
+    <br><br>
+    <button class="btn btn-outline-danger" (click)="onPostDelete()">Delete Post</button>
+
+</div>
