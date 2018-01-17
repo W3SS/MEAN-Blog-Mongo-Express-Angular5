@@ -33,11 +33,14 @@
 
   </div>
 
-  <!-- tags -->
-  <label for="tags">Add tags</label>
-  <input type="text" name="tags" class="form-control"  placeholder="Add tag" formControlName="tags" (keyup.enter)="addTag()">
-  <p>
-      <span *ngFor="let tag of article.tags; let i = index"><span>{{tag}}</span> <span class="fa fa-times" (click)="deleteTag(tag, i)"></span> </span></p>
+    <!-- tags -->
+    <label for="tags">Add tags</label>
+    <input type="text" name="tags" class="form-control"  placeholder="Add tag" formControlName="tags" (keyup.enter)="addTag()">
+    <p class="tags">
+        <span *ngFor="let tag of article.tags; let i = index">
+          <span class="badge badge-secondary">{{tag}} <span class="fa fa-times" (click)="deleteTag(tag, i)"></span></span>
+        </span>
+    </p>
 
 
   <input [disabled]='formSubmitted' class="btn btn-primary" type="submit" value="Save article">

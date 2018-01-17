@@ -1,2 +1,14 @@
 textarea {min-height: 400px;}
-.badge{margin-right:5px}
+p.tags {
+    margin: 10px 0 20px 0;
+    .badge{
+        margin-right:5px;
+        padding: 5px 8px 5px 8px;
+        .fa {
+            padding-left: 2px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

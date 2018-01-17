@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer } from '@angular/core';
 import { Router } from '@angular/router';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages/module/flash-messages.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { FlashMessagesService } from 'angular2-flash-messages/module/flash-messa
 export class NavbarComponent implements OnInit {
 
   constructor(
+    private renderer: Renderer,
     private authService: AuthService,
     private router: Router,
     private flashMessagesService: FlashMessagesService

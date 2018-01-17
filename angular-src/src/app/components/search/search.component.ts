@@ -9,6 +9,7 @@ import {Observable} from 'rxjs/Rx';
   template: `
     <div class="search-wrapper">
         <h2>Search</h2>
+        <p>Find post titles and tags</p>
         <input type="text" [formControl]="term" autofocus="autofocus" placeholder="">
         <ul>
           <li *ngFor="let item of items | async"><a [routerLink]="['/blog/post/', item._id]">{{item.title}}</a></li>

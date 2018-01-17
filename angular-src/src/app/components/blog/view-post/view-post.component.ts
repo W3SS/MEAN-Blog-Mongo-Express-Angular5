@@ -10,11 +10,7 @@ import { AuthService } from "../../../services/auth.service";
   template: `
     <h2>{{article?.title}}</h2>
     <p>{{article?.body}}</p>
-    <p>By {{article?.author.firstName}} {{article?.author.lastName}} </p>
-    
-    <div *ngIf="article?.tags.length > 0">
-    <p>tags: {{article?.tags}}</p>
-    </div>
+    <p>By: <strong>{{ article?.author.firstName }} {{ article?.author.lastName }}</strong> on <strong>{{ article?.created | date: 'dd-MMM-yyyy' }}</strong></p>
 
     <button class="btn btn-primary" (click)="goBack()">&larr; Go back</button>
     <br><br>

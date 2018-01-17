@@ -6,9 +6,6 @@ import { AuthService } from "../../services/auth.service";
   selector: 'app-blog',
   styleUrls: ['./blog.component.scss'],
   template: `
-
-    <h2>Latest Posts</h2>
-
     <div class="post" *ngFor="let article of articles">
         <h3>{{ article.title }}</h3>
         <p class="exceprt">{{ article.excerpt }}</p>

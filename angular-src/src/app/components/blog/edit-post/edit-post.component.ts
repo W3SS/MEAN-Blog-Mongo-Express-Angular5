@@ -78,11 +78,14 @@ export class EditPostComponent implements OnInit {
           }, 2000);
       }
     });
+
     // Iterate over the form controls 
     Object.keys( this.createPostForm.controls).forEach(key => {
       this.createPostForm.controls[key].markAsDirty();
     });
 
+    // Scroll to top to read message
+    window.scrollTo(0, 0);
   }
 
   onPostDelete() {
@@ -95,6 +98,8 @@ export class EditPostComponent implements OnInit {
         this.router.navigate(['/blog']);
       }, 2000);
     });
+    // Scroll to top to read message
+    window.scrollTo(0, 0);
   }
 
   disableForm() {

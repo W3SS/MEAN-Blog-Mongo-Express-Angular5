@@ -5,11 +5,8 @@ import { NotAuthGuard } from "./guards/not-auth.guard";
 
 import { HomeComponent } from "./components/home/home.component";
 import { AboutComponent } from "./components/about/about.component";
-import { ContactComponent } from "./components/contact/contact.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { LoginComponent } from "./components/login/login.component";
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { ProfileComponent } from "./components/profile/profile.component";
 import { BlogComponent } from "./components/blog/blog.component";
 import { EditPostComponent } from './components/blog/edit-post/edit-post.component';
 import { CreatePostComponent } from './components/blog/create-post/create-post.component';
@@ -24,11 +21,8 @@ const appRoutes = [
         { path: 'create-post', component: CreatePostComponent },
         { path: 'post/:id', component: ViewPostComponent },
         { path: 'edit-post/:id', component: EditPostComponent, canActivate: [AuthGuard] }
-    ] },
+    ]},
     { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
-    { path: 'contact', component: ContactComponent },
-    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
     { path: 'search', component: SearchComponent },
