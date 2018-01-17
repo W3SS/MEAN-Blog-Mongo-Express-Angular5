@@ -7,11 +7,13 @@ import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'app-search',
   template: `
-      <h2>Search</h2>
-      <input type="text" [formControl]="term" autofocus="autofocus">
-      <ul>
-        <li *ngFor="let item of items | async"><a [routerLink]="['/blog/post/', item._id]">{{item.title}}</a></li>
-      </ul>
+    <div class="search-wrapper">
+        <h2>Search</h2>
+        <input type="text" [formControl]="term" autofocus="autofocus" placeholder="">
+        <ul>
+          <li *ngFor="let item of items | async"><a [routerLink]="['/blog/post/', item._id]">{{item.title}}</a></li>
+        </ul>
+      </div>
   `,
   styleUrls: ['./search.component.scss']
 })
