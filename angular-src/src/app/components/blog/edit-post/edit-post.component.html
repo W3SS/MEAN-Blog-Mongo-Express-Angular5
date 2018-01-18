@@ -4,8 +4,8 @@
   {{ message }}
 </div>
 
-<form *ngIf="article" [formGroup]="createPostForm" (submit)="onPostSubmit()" autocomplete="off" (keydown.enter)="$event.preventDefault()">
-  <!-- title -->
+<form *ngIf="article" [formGroup]="createPostForm" (submit)="onPostSubmit()" autocomplete="off" (keydown.enter)="preventSubmission($event)">
+    <!-- title -->
   <div class="form-group required">
       <label class="col-form-label" for="title">Title</label>
       <input [(ngModel)]="article.title" formControlName="title" type="text" name="title" class="form-control  has-error"
@@ -24,7 +24,7 @@
   <!-- body -->
   <div class="form-group required">
       <label class="col-form-label" for="body">Body</label>
-      <textarea [(ngModel)]="article.body" formControlName="body" type="text" name="body" class="form-control" value=""
+      <textarea [(ngModel)]="article.body" formControlName="body" type="text" name="body" id="text-area" class="form-control" value=""
 
           [ngClass]="{'is-invalid': (createPostForm.controls.body.errors && createPostForm.controls.body.dirty)}">
         </textarea>

@@ -108,6 +108,13 @@ export class EditPostComponent implements OnInit {
     });
   }
 
+  preventSubmission(e) {
+    const textArea = document.getElementById('text-area');
+    if(!(e.target === textArea)) {
+      e.preventDefault();
+    }
+  }
+
   goBack() {
     this.location.back();
   }

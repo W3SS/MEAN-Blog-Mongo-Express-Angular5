@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, enableProdMode } from '@angular/core';
+import { NgModule, PLATFORM_ID, enableProdMode } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { AppRoutingModule } from "./app.routing";
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -13,6 +14,7 @@ import { AuthGuard } from "./guards/auth.guard";
 import { NotAuthGuard } from "./guards/not-auth.guard";
 import { BlogService } from "./services/blog.service";
 import { SearchService } from "./services/search.service";
+import { HighlightService } from "./services/highlight.service";
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -53,6 +55,7 @@ import { SearchComponent } from './components/search/search.component';
     NotAuthGuard,
     BlogService,
     SearchService,
+    HighlightService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
