@@ -11,6 +11,7 @@ import { HighlightService } from "../../../services/highlight.service";
   template: `
     <h2>{{article?.title}}</h2>
     <div [innerHtml]="article?.body"></div>
+    <br>
     <p>By: <strong>{{ article?.author.firstName }} {{ article?.author.lastName }}</strong> on <strong>{{ article?.created | date: 'dd-MMM-yyyy' }}</strong></p>
 
     <button class="btn btn-primary" (click)="goBack()">&larr; Go back</button>
@@ -44,6 +45,8 @@ export class ViewPostComponent implements OnInit {
       this.highlighted = true;
     }
   }
+
+  ngOnChanges() 
 
   ngOnInit() {
     this.urlParam = this.activatedRoute.snapshot.params;
