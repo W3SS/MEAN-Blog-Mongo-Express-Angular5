@@ -76,6 +76,8 @@ export class EditPostComponent implements OnInit {
           setTimeout(() => {
             this.router.navigate(['/blog']);
           }, 2000);
+          // Scroll to top to read message
+          window.scrollTo(0, 0);
       }
     });
 

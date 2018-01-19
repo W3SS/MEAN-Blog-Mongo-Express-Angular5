@@ -58,7 +58,6 @@ export class CreatePostComponent implements OnInit {
     
     this.blogService.saveArticle(article).subscribe(article => {
       if(!article.success) {
-        console.log(article);
         this.messageClass = 'alert alert-danger';
         this.message = 'There are some errors';
         this.formSubmitted = false;
@@ -68,8 +67,10 @@ export class CreatePostComponent implements OnInit {
         this.formSubmitted = true;
         this.disableForm();
         setTimeout(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/blog']);
         }, 2000);
+        // Scroll to top to read message
+        window.scrollTo(0, 0);
       }
     });
     // Iterate over the form controls 

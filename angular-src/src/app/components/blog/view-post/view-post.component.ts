@@ -45,9 +45,7 @@ export class ViewPostComponent implements OnInit {
       this.highlighted = true;
     }
   }
-
-  ngOnChanges() 
-
+  
   ngOnInit() {
     this.urlParam = this.activatedRoute.snapshot.params;
 
