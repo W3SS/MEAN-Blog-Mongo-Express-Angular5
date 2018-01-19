@@ -77,13 +77,19 @@ export class CreatePostComponent implements OnInit {
     Object.keys( this.createPostForm.controls).forEach(key => {
       this.createPostForm.controls[key].markAsDirty();
     });
-
   }
 
   disableForm() {
     Object.keys( this.createPostForm.controls).forEach(key => {
       this.createPostForm.controls[key].disable();
     });
+  }
+
+  preventSubmission(e) {
+    const textArea = document.getElementById('text-area');
+    if(!(e.target === textArea)) {
+      e.preventDefault();
+    }
   }
 
   ngOnInit() {

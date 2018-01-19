@@ -24,7 +24,7 @@
   <!-- body -->
   <div class="form-group required">
       <label class="col-form-label" for="body">Body</label>
-      <textarea [(ngModel)]="article.body" formControlName="body" type="text" name="body" id="text-area" class="form-control" value=""
+      <textarea [(ngModel)]="article.body" id="text-area" formControlName="body" type="text" name="body" id="text-area" class="form-control" value=""
 
           [ngClass]="{'is-invalid': (createPostForm.controls.body.errors && createPostForm.controls.body.dirty)}">
         </textarea>
