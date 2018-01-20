@@ -62,7 +62,7 @@
     <h2>Article preview:</h2>
     <h5>{{article.title}}</h5>
     <div><i>{{article.excerpt}}</i></div><br>
-    <div>{{article.body}}</div>
+    <div [innerHtml]="article?.body"></div>
     <br>
     <div>
         <p>

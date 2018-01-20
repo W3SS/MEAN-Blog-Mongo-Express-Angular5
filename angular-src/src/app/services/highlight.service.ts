@@ -25,4 +25,8 @@ export class HighlightService {
       Prism.highlightAll();
     }
   }
+
+/*   rerender(precode) {
+    Prism.highlightElement(precode);
+  } */
 }

@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { BlogService } from "../../../services/blog.service";
 import { Article } from "../../../models/article";
+import { HighlightService } from "../../../services/highlight.service";
 
 @Component({
   selector: 'app-edit-post',
@@ -21,6 +22,7 @@ export class EditPostComponent implements OnInit {
   formSubmitted: Boolean = false;
   tag: String;
   article: any;
+  highlighted: boolean = false;
 
   constructor(
     private location: Location,
@@ -28,10 +30,10 @@ export class EditPostComponent implements OnInit {
     private router: Router,
     private blogService: BlogService,
     private activatedRoute: ActivatedRoute,
-    private changeDetectionRef: ChangeDetectorRef
+    private changeDetectionRef: ChangeDetectorRef,
+    private highlightService: HighlightService
   ) { 
     this.createForm();
-    
    }
 
    createForm() {
@@ -119,6 +121,13 @@ export class EditPostComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  ngAfterViewChecked() {
+    if (this.article && !this.highlighted) {
+      this.highlightService.highlightAll();
+      this.highlighted = false;
+    }
   }
 
   ngOnInit() {
